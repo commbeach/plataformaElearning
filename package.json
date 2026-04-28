@@ -1,17 +1,19 @@
 {
   "name": "elearning",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "src/backend/connection/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node src/backend/connection/server.js"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "body-parser": "^2.2.2",
+    "ejs": "^5.0.2",
     "express": "^5.2.1",
+    "express-ejs-layouts": "^2.5.1",
     "mongodb": "^7.2.0",
     "mongoose": "^9.5.0"
   }

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Alunos | E-Learning</title>
+    
+    <!-- Bootstrap 5 & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Estilo Global (herdado do "base") -->
+    <link rel="stylesheet" href="/src/frontend/pages/components/styles.css">
+</head>
+<body>
+
+    <!-- Placeholder para a Sidebar -->
+    <div id="sidebar-placeholder"></div>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <div class="container-fluid">
+            <h2 class="mb-4 fw-bold">Gerenciar Alunos</h2>
+
+            <!-- Card de Cadastro -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <form method="POST" action="/" class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Nome Completo</label>
+                            <input type="text" name="nomAluno" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">CPF</label>
+                            <input type="text" name="cpfAluno" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">E-mail</label>
+                            <input type="email" name="emailAluno" class="form-control" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Telefone</label>
+                            <input type="text" name="telAluno" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Cidade</label>
+                            <input type="text" name="cidadeAluno" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Estado</label>
+                            <input type="text" name="estadoAluno" class="form-control">
+                        </div>
+                        <div class="col-md-4 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary w-100 py-2">Salvar Aluno</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Tabela de Listagem -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table id="tabela" class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>E-mail</th>
+                                    <th>Telefone</th>
+                                    <th>Endereço</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Carregado via crudAluno.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script para carregar a Sidebar Dinamicamente -->
+    <script>
+        // Como você já está na pasta 'pages', basta entrar em 'components'
+        fetch('src/frontend/pages/components/sidebar.html')
+            .then(res => {
+                if (!res.ok) throw new Error('Erro ao carregar a sidebar');
+                return res.text();
+            })
+            .then(data => {
+                document.getElementById('sidebar-placeholder').innerHTML = data;
+            })
+            .catch(err => console.error(err));
+    </script>
+
+    <!-- Script de dados -->
+    <script src="/src/frontend/scripts/GerenciarAlunos/crudAluno.js"></script>
+</body>
+</html>

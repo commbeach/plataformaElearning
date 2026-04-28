@@ -1,0 +1,31 @@
+/* Layout Base */
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Sidebar Fixa */
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    position: fixed;
+    background-color: #212529;
+    color: white;
+    z-index: 1000;
+}
+
+/* Conteúdo Principal */
+.main-content {
+    margin-left: 280px; /* Largura da sidebar */
+    width: calc(100% - 280px);
+    padding: 30px;
+    transition: all 0.3s;
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 768px) {
+    .sidebar { margin-left: -280px; }
+    .main-content { margin-left: 0; width: 100%; }
+}
