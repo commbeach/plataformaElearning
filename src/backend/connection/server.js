@@ -33,6 +33,11 @@ app.get("/", function(req, res) {
     res.sendFile(caminhoHtml);
 });
 
+app.get("/GerenciarInstrutores", function(req, res) {
+    const caminhoHtml = path.join(projetoRaiz, "/src/frontend/pages/GerenciarInstrutores.html");
+    res.sendFile(caminhoHtml);
+});
+
 
 //ROTAS DE ALUNO
 // Rota POST: Criar aluno (Refatorada para usar o Service e Async/Await)
