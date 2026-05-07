@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Cursos | E-Learning</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/src/frontend/pages/components/styles.css">
+    <style>
+        .modulo-item { border-left: 4px solid #0d6efd; background: #f1f4f9; }
+        .aula-item { background: #ffffff; border: 1px solid #dee2e6; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div id="sidebar-placeholder"></div>
+
+    <main class="main-content">
+        <div class="container-fluid">
+            <h2 class="mb-4 fw-bold">Gerenciar Cursos</h2>
+
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <form id="formCurso">
+                        <input type="hidden" id="cursoIdAtual">
+                        <div class="row g-3">
+                            <div class="col-md-2">
+                                <label class="form-label">Código</label>
+                                <input type="text" id="codigoCurso" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Título do Curso</label>
+                                <input type="text" id="titulo" class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Instrutor Responsável</label>
+                                <select id="instrutorId" class="form-select" required>
+                                    <option value="">Carregando instrutores...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Descrição</label>
+                                <textarea id="descricao" class="form-control" rows="2"></textarea>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Preço (R$)</label>
+                                <input type="number" id="preco" class="form-control" step="0.01">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Carga Horária (h)</label>
+                                <input type="number" id="cargaHoraria" class="form-control">
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">Conteúdo (Módulos e Aulas)</h4>
+                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="addModulo()">
+                                <i class="bi bi-plus-circle me-1"></i> Adicionar Módulo
+                            </button>
+                        </div>
+
+                        <div id="container-modulos">
+                            <!-- Módulos entram aqui -->
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary px-5 py-2">Salvar Curso Completo</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-0">
+                    <table id="tabelaCursos" class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Código</th>
+                                <th>Título</th>
+                                <th>Instrutor</th>
+                                <th>Preço</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        fetch('/src/frontend/pages/components/sidebar.html')
+            .then(res => res.text())
+            .then(data => { document.getElementById('sidebar-placeholder').innerHTML = data; })
+    </script>
+    <script src="/src/frontend/scripts/GerenciarCursos/crudCurso.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistir Curso | E-Learning</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/src/frontend/pages/components/styles.css">
+    <style>
+        .video-container { background: #000; border-radius: 8px; overflow: hidden; aspect-ratio: 16/9; }
+        .playlist-container { height: calc(100vh - 150px); overflow-y: auto; }
+        .aula-link { cursor: pointer; transition: 0.2s; border-radius: 5px; margin-bottom: 5px; }
+        .aula-link:hover { background: #e9ecef; }
+        .aula-link.active { background: #0d6efd; color: white !important; }
+        .modulo-header { background: #f8f9fa; font-weight: bold; position: sticky; top: 0; z-index: 10; }
+    </style>
+</head>
+<body>
+    <div id="sidebar-placeholder"></div>
+
+    <main class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Coluna do Vídeo -->
+                <div class="col-lg-8">
+                    <div class="video-container mb-3 shadow">
+                        <iframe id="videoPlayer" width="100%" height="100%" src="" 
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <h3 id="aulaTitulo" class="fw-bold">Selecione uma aula</h3>
+                    <p id="aulaDescricao" class="text-muted"></p>
+                    <hr>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="flex-grow-1">
+                            <h5 id="cursoTitulo" class="mb-0">Nome do Curso</h5>
+                            <small id="instrutorNome" class="text-primary"></small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna da Playlist -->
+                <div class="col-lg-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-dark text-white">Conteúdo do Curso</div>
+                        <div class="card-body p-0 playlist-container" id="playlist">
+                            <!-- Inserido via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        fetch('/src/frontend/pages/components/sidebar.html')
+            .then(res => res.text())
+            .then(data => { document.getElementById('sidebar-placeholder').innerHTML = data; })
+    </script>
+    <script src="/src/frontend/scripts/AssistirCurso/player.js"></script>
+</body>
+</html>

@@ -1,14 +1,20 @@
 const mongoose = require("mongoose");
 
-const alunoDado = {
-    nomAluno: String,
-    cpfAluno: String,
-    emailAluno: String,
-    telAluno: String,
-    cidadeAluno: String,
-    estadoAluno: String
-}
+const AlunoSchema = new mongoose.Schema({
+    nomAluno: { type: String, required: true },
+    cpfAluno: { type: String, required: true },
+    emailAluno: { type: String, required: true },
+    telAluno: { type: String },
+    endereco: {
+        tipoLogradouro: { type: String }, 
+        logradouro: { type: String },
+        numero: { type: String },
+        complemento: { type: String },
+        bairro: { type: String },
+        cep: { type: String },
+        cidade: { type: String },
+        estado: { type: String }
+    }
+});
 
-const Aluno = mongoose.model("alunos", alunoDado);
-
-module.exports = Aluno;
+module.exports = mongoose.model("Aluno", AlunoSchema);
