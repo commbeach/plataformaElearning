@@ -14,7 +14,9 @@ const AlunoSchema = new mongoose.Schema({
         cep: { type: String },
         cidade: { type: String },
         estado: { type: String }
-    }
+    },
+    
+    cursosInscritos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Curso' }]
 });
 
 module.exports = mongoose.model("Aluno", AlunoSchema);

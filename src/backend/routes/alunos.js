@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const alunoService = require("../services/alunoService.js"); // Ajuste o caminho conforme sua estrutura
-
+const Aluno = require("../models/Aluno.js");
 // Rota POST: Criar aluno (Agora em /alunos)
 router.post("/", async (req, res) => {
     try {
@@ -69,5 +69,31 @@ router.delete("/:id", async (req, res) => {
         res.status(500).json({ erro: error.message });
     }
 });
+
+
+router.post("/:id/inscrever", async (req, res) => {
+    try {
+        const alunoId = req.params.id;
+        const { cursoId } = req.body;
+        
+        const aluno = await Aluno.findById(alunoId);
+        if (!aluno) return res.status(404).json({ success: false, erro: "Aluno não encontrado" });
+
+        // Inicia o array se o aluno for antigo e não tiver
+        if (!aluno.cursosInscritos) aluno.cursosInscritos = [];
+        
+        // Adiciona a FK do curso apenas se ele já não estiver inscrito
+        if (!aluno.cursosInscritos.includes(cursoId)) {
+            aluno.cursosInscritos.push(cursoId);
+            await aluno.save();
+        }
+
+        res.json({ success: true, mensagem: "Inscrição realizada com sucesso!" });
+    } catch (error) {
+        console.error("Erro na inscrição:", error);
+        res.status(500).json({ success: false, erro: error.message });
+    }
+});
+
 
 module.exports = router;
